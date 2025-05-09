@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIZZARIA INOVA</title>
+</head>
+<body>
+    <div class="container">
+        <h1>PIZZARIA INOVA</h1>
+        <div class="menu">
+            <button onclick="mostrarSecao('cadastrar pedido')"></button>
+            <button onclick="mostrarSecao('Consultar pizzas')"></button>
+            <button onclick="mostrarSecao('alterar pedido')"></button>
+            <button onclick="mostrarSecao('agendar pizza')"></button>
+            <button onclick="mostrarSecao('venda de pizza')"></button>
+    </div>
+        <div id="cadastrar pedido" class="hidden">
+            <h2>Cadastrar Pedido</h2>
+            <div class="form-group">
+                <label for="pedido">Pedido:</label>
+                <input type="text" id="pedido" placeholder="Digite o pedido" class="form-control">
+            </div>
+            <button onclick="adicionarPedido()" class="btn-primary">Adicionar Pedido</button>
+        </div>
+
+        <div id="Consultar pizzas" class="hidden">
+            <h2>Consultar Pizzas</h2>
+            <input type="text" id="busca" placeholder="Buscar por pizza" oninput="buscarPizza()" class="form-control">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Ingredientes</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-pizzas"></tbody>
+            </table>
+        </div>
+
+        <!-- Add more sections as needed -->
+</body>
+</html>

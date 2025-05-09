@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Biblioteca SENAI</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Biblioteca SENAI - Educação para a Vida</h1>
+        <div class="menu">
+            <button onclick="mostrarSecao('cadastro')">Cadastro de Livros</button>
+            <button onclick="mostrarSecao('consulta')">Consulta de Livros</button>
+            <button onclick="mostrarSecao('alterar')">Alterar Livros</button>
+            <button onclick="mostrarSecao('emprestar')">Emprestar Livro</button>
+            <button onclick="mostrarSecao('emprestados')">Livros Emprestados</button>
+            <button onclick="mostrarSecao('venda')">Venda de Livros</button>
+            <button onclick="mostrarSecao('relatorio-vendas')">Relatório de Vendas</button>
+        </div>
+
+        <div id="cadastro" class="hidden">
+            <h2>Cadastrar Livro</h2>
+            <div class="form-group">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" placeholder="Digite o título do livro" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="autor">Autor:</label>
+                <input type="text" id="autor" placeholder="Digite o autor do livro" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="ano">Ano:</label>
+                <input type="number" id="ano" placeholder="Digite o ano do livro" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" placeholder="Quantidade disponível" class="form-control" value="1" min="1">
+            </div>
+            <button onclick="adicionarLivro()" class="btn-primary">Adicionar Livro</button>
+        </div>
+
+        <div id="consulta" class="hidden">
+            <h2>Consultar Livros</h2>
+            <input type="text" id="busca" placeholder="Buscar por título" oninput="buscarLivro()" class="form-control">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Ano</th>
+                        <th>Disponíveis</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-livros"></tbody>
+            </table>
+        </div>
+
+        <div id="alterar" class="hidden">
+            <h2>Alterar Livros</h2>
+            <input type="text" id="titulo-alterar" placeholder="Digite o título do livro" oninput="buscarLivroParaAlterar()" class="form-control">
+            <div id="form-alterar" class="hidden">
+                <div class="form-group">
+                    <label for="novo-titulo">Novo Título:</label>
+                    <input type="text" id="novo-titulo" placeholder="Digite o novo título do livro" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="novo-autor">Novo Autor:</label>
+                    <input type="text" id="novo-autor" placeholder="Digite o novo autor do livro" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="novo-ano">Novo Ano:</label>
+                    <input type="number" id="novo-ano" placeholder="Digite o novo ano do livro" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="nova-quantidade">Nova Quantidade:</label>
+                    <input type="number" id="nova-quantidade" placeholder="Nova quantidade" class="form-control" min="0">
+                </div>
+                <button onclick="atualizarLivro()" class="btn-primary">Atualizar Livro</button>
+            </div>
+        </div>
+
+        <div id="emprestar" class="hidden">
+            <h2>Emprestar Livro</h2>
+            <input type="text" id="busca-emprestar" placeholder="Buscar por título" oninput="buscarLivroParaEmprestar()" class="form-control">
+            <div id="resultado-busca-emprestar"></div>
+            <div id="form-emprestar" class="hidden">
+                <div class="form-group">
+                    <label for="nome-pessoa">Nome da Pessoa:</label>
+                    <input type="text" id="nome-pessoa" placeholder="Digite o nome da pessoa" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="data-emprestimo">Data de Empréstimo:</label>
+                    <input type="date" id="data-emprestimo" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="data-devolucao">Data de Devolução:</label>
+                    <input type="date" id="data-devolucao" class="form-control">
+                </div>
+                <button onclick="realizarEmprestimo()" class="btn-primary">Confirmar Empréstimo</button>
+            </div>
+        </div>
+
+        <div id="emprestados" class="hidden">
+            <h2>Livros Emprestados</h2>
+            <input type="text" id="busca-emprestimos" placeholder="Buscar por pessoa ou livro" oninput="buscarEmprestimos()" class="form-control">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Pessoa</th>
+                        <th>Data Empréstimo</th>
+                        <th>Data Devolução</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-emprestados"></tbody>
+            </table>
+        </div>
+
+        <div id="venda" class="hidden">
+            <h2>Venda de Livros</h2>
+            <input type="text" id="busca-venda" placeholder="Buscar por título" oninput="buscarLivroParaVenda()" class="form-control">
+            <div id="resultado-busca-venda"></div>
+            <div id="form-venda" class="hidden">
+                <div class="form-group">
+                    <label for="quantidade-venda">Quantidade:</label>
+                    <input type="number" id="quantidade-venda" placeholder="Quantidade a vender" class="form-control" min="1">
+                </div>
+                <button onclick="realizarVenda()" class="btn-primary">Confirmar Venda</button>
+            </div>
+        </div>
+
+        <div id="relatorio-vendas" class="hidden">
+            <h2>Relatório de Vendas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Quantidade Vendida</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-vendas"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Biblioteca SENAI - Todos os direitos reservados.</p>
+    <script src="biblioteca3.js"></script>
+</body>
+</html>
