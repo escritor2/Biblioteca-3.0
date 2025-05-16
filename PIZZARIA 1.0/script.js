@@ -13,16 +13,16 @@ function adicionarPizza() {
   const nome = document.getElementById("nome").value;
   const ingredientes = document.getElementById("ingredientes").value;
   const preco = parseFloat(document.getElementById("preco").value);
-  
+  let mensagem = document.getElementById("mensagem");
   if (nome && ingredientes && preco) {
     pizzaria.push({ nome, ingredientes, preco });
     document.getElementById("nome").value = "";
     document.getElementById("ingredientes").value = "";
     document.getElementById("preco").value = "";
+    mensagem.innerHTML = "Pizza adicionada com sucesso!";
     atualizarLista();
-    {mensagem}("Pizza adicionada com sucesso!");
   } else {
-    {mensagem}("Por favor, preencha todos os campos.");
+    mensagem.innerHTML = "<strong>Por favor, preencha todos os campos.</strong>";
   }
 }
 
