@@ -72,7 +72,7 @@ function alterarPizza() {
 
 function atualizarLista(lista = pizzaria) {
   const tabela = document.getElementById("lista-pizzas");
-  tabela.innerHTML = "";
+  tabela.innerHTML = "pizza adicionada com sucesso!";
 
   lista.forEach((pizza) => {
     const linha = document.createElement("tr");
